@@ -18,19 +18,19 @@ class ApiClient:
 
         return resp
 
-    def _post_api(self, endpoint: str, data: dict=None):
+    def _post_api(self, endpoint: str, json: dict=None):
         """POST-запрос"""
         url = self._get_full_url(endpoint)
-        resp = self.session.post(url, data=data)
-        logging.info(f"POST-запрос: {url} | data={data} | status={resp.status_code}")
+        resp = self.session.post(url, json=json)
+        logging.info(f"POST-запрос: {url} | json={json} | status={resp.status_code}")
 
         return resp
 
-    def _put_api(self, endpoint: str, data: dict=None):
+    def _put_api(self, endpoint: str, json: dict=None):
         """PUT-запрос"""
         url = self._get_full_url(endpoint)
-        resp = self.session.put(url, data=data)
-        logging.info(f"PUT-запрос: {url} | data={data} | status={resp.status_code}")
+        resp = self.session.put(url, json=json)
+        logging.info(f"PUT-запрос: {url} | json={json} | status={resp.status_code}")
 
         return resp
 

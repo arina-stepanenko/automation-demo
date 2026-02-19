@@ -1,16 +1,16 @@
 from helpers.api_client import ApiClient
 
 
-class AuthClient(ApiClient):
+class AuthApi:
     """Клиент с поддержкой авторизации и токенов"""
-    def __init__(self, base_url):
-        super().__init__(base_url)
+    def __init__(self, client: ApiClient):
+        self.client = client
         self.token = None
         self.refresh_token = None
 
     def register(self, user_data):
         """Регистрация нового пользователя"""
-        resp = self._post_api("/users/add", data=user_data)
+        resp = self.client._post_api("/users/add", json=user_data)
         return resp
 
     def login(self, name, password):
@@ -19,8 +19,10 @@ class AuthClient(ApiClient):
             "username": name,
             "password": password
         }
-        resp = self._post_api("/auth/login", data=data)
+        resp = self.client._post_api("/auth/login", json=data)
         resp_json = resp.json()
+        print(data)
+        print(resp_json)
         self.token = resp_json.get("token")
         self.refresh_token = resp_json.get("refreshToken")
 
@@ -28,5 +30,5 @@ class AuthClient(ApiClient):
 
     def get_info_user(self):
         """Получить информацию о текущем пользователе"""
-        resp = self._get_api("/auth/me")
+        resp = self.client._get_api("/auth/me")
         return resp

@@ -1,5 +1,5 @@
 def success_user_data():
     return {
-        "email": "example@gmail.com",
+        "name": "Ivan",
         "password": "QweAsdZxc123",
     }
