@@ -10,8 +10,6 @@ def generate_user_data():
         "name": f"Test-User {random_string(4)}",
         "username": f"testuser_{random_string(5)}",
         "email": f"{random_string(6)}@example.com",
-        "phone": "123-456-7890",
-        "website": "example.com"
     }
 
 def generate_post_data(user_id=1):
