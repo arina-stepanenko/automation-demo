@@ -51,11 +51,10 @@ report_job:
   stage: report
   needs: ["test_job"]
   before_script:
-    - apt-get update -qq && apt-get install -y -qq openjdk-17-jre-headless
+    - apt-get update -qq && apt-get install -y -qq default-jre-headless
     - wget -q https://github.com/allure-framework/allure2/releases/download/2.30.0/allure-2.30.0.tgz
     - tar -xzf allure-2.30.0.tgz
     - export PATH=$PATH:$(pwd)/allure-2.30.0/bin
-    - export PYTHONPATH=$PYTHONPATH:$(pwd)/new_project
   script:
     - allure generate -c allure-results -o allure-report
   artifacts:
