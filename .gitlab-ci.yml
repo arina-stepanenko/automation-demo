@@ -26,6 +26,7 @@ lint_job:
   stage: lint
   before_script:
     - pip install ruff
+    - export PYTHONPATH=$PYTHONPATH:$(pwd)/new_project
   script:
     - ruff check .
   allow_failure: true
@@ -34,6 +35,8 @@ test_job:
   stage: test
   variables:
     PYTEST_ADDOPTS: ""
+  before_script:
+    - export PYTHONPATH=$PYTHONPATH:$(pwd)/new_project
   script:
     - pytest --alluredir=allure-results -v $PYTEST_ADDOPTS
   artifacts:
@@ -50,6 +53,7 @@ report_job:
     - wget -q https://github.com/allure-framework/allure2/releases/download/2.30.0/allure-2.30.0.tgz
     - tar -xzf allure-2.30.0.tgz
     - export PATH=$PATH:$(pwd)/allure-2.30.0/bin
+    - export PYTHONPATH=$PYTHONPATH:$(pwd)/new_project
   script:
     - allure generate -c allure-results -o allure-report
   artifacts:
