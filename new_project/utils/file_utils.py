@@ -1,5 +1,4 @@
 import json
-import os
 
 def read_json(file_path):
     """Читает JSON-файл и возвращает данные"""
