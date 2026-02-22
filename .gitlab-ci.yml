@@ -58,4 +58,4 @@ report_job:
       - allure-report
     expire_in: 1 week
   rules:
-    - if: @CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
