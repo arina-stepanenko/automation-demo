@@ -13,7 +13,7 @@ class ApiClient:
     def _get_api(self, endpoint: str, params: dict=None):
         """GET-запрос"""
         url = self._get_full_url(endpoint)
-        resp = self.session.get(url, params=params)
+        resp = self.session.gt(url, params=params)
         logging.info(f"GET-запрос: {url} | params={params} | status={resp.status_code}")
 
         return resp

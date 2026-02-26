@@ -12,6 +12,7 @@ stages:
 variables:
   PYTHON_VERSION: "3.10"
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  SELENIUM_HOST: "selenium__standalone-chrome"
 
 default:
   image: python:${PYTHON_VERSION}
@@ -46,6 +47,16 @@ test_job:
     paths:
       - allure-results
     expire_in: 1 week
+
+test_ui_job:
+  stage: test
+  services:
+    - name: selenium/standalone-chrome:latest
+      alias: selenium
+  before_script:
+    - pip install selenium pytest
+  script:
+    - pytest tests/ui/ -v --selenium-host=selenium
 
 report_job:
   stage: report
